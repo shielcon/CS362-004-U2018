@@ -1,0 +1,172 @@
+        -:    0:Source:testGetWinners.c
+        -:    0:Graph:testGetWinners.gcno
+        -:    0:Data:testGetWinners.gcda
+        -:    0:Runs:1
+        -:    0:Programs:1
+        -:    1:#include "dominion.h"
+        -:    2:#include "dominion_helpers.h"
+        -:    3:#include <string.h>
+        -:    4:#include <stdio.h>
+        -:    5:#include <assert.h>
+        -:    6:#include "rngs.h"
+        -:    7:
+        -:    8:#define NOISY_TEST 1
+        -:    9:
+        1:   10:int main(){
+        -:   11:	int r;
+        -:   12:	int i;
+        1:   13:	int seed = 1000;
+        1:   14:	int maxHandCount = 5;
+        1:   15:	int k[10] = {adventurer, council_room, feast, gardens, mine, remodel, smithy, village, baron, great_hall};
+        -:   16:	int players[2];
+        -:   17:
+        1:   18:	int numPlayer = 2;
+        -:   19:	struct gameState G;
+        1:   20:	int failures = 0;
+        -:   21:	
+        1:   22:	memset(&G, 23, sizeof(struct gameState));
+        1:   23:	r = initializeGame(numPlayer, k, seed, &G);
+        1:   24:	G.handCount[0]=5;
+        1:   25:	G.handCount[1]=5;
+        -:   26:	
+        -:   27:	int curses[5];
+        -:   28:	int estates[5];
+        6:   29:	for (i = 0; i < maxHandCount; i++){
+        5:   30:		estates[i] = estate;
+        5:   31:		curses[i] = curse;
+        -:   32:	}
+        -:   33:
+        -:   34:	//simple case: one player has a score of five, the other has a score of -5
+        -:   35:
+        1:   36:	memcpy(G.hand[0], estates, sizeof(int) * maxHandCount);
+        1:   37:	memcpy(G.hand[1], curses, sizeof(int) * maxHandCount);
+        -:   38:
+        1:   39:	getWinners(players, &G);
+        -:   40:
+        1:   41:	printf("expected result for p1: 1, actual result: %d\n", players[0]);
+        1:   42:	printf("expected result for p2: 0, actual result: %d\n", players[1]);
+        -:   43:
+        1:   44:	if (players[0] != 1 || players[1] != 0){
+    #####:   45:		printf("test failed\n");
+    #####:   46:		failures++;
+        -:   47:	}
+        -:   48:
+        -:   49:
+        -:   50:	//another simple case: this time, player two wins
+        1:   51:        memset(&G, 23, sizeof(struct gameState));
+        1:   52:        r = initializeGame(numPlayer, k, seed, &G);
+        1:   53:        G.handCount[0]=5;
+        1:   54:        G.handCount[1]=5;
+        -:   55:
+        1:   56:        memcpy(G.hand[0], curses, sizeof(int) * maxHandCount);
+        1:   57:        memcpy(G.hand[1], estates, sizeof(int) * maxHandCount);
+        -:   58:
+        1:   59:        getWinners(players, &G);
+        -:   60:
+        1:   61:        printf("expected result for p1: 0, actual result: %d\n", players[0]);
+        1:   62:        printf("expected result for p2: 1, actual result: %d\n", players[1]);
+        -:   63:
+        1:   64:        if (players[0] != 0 || players[1] != 1){
+    #####:   65:                printf("test failed\n");
+    #####:   66:                failures++;
+        -:   67:        }
+        -:   68:
+        -:   69:
+        -:   70:
+        -:   71:	//both have negative scores, but p1 has one estate card
+        -:   72:	
+        1:   73:	memset(&G, 23, sizeof(struct gameState));
+        1:   74:        r = initializeGame(numPlayer, k, seed, &G);
+        1:   75:        G.handCount[0]=5;
+        1:   76:        G.handCount[1]=5;
+        -:   77:
+        1:   78:        memcpy(G.hand[0], curses, sizeof(int) * maxHandCount - 1);
+        1:   79:	G.hand[0][4] = estate;
+        1:   80:        memcpy(G.hand[1], curses, sizeof(int) * maxHandCount);
+        -:   81:
+        1:   82:	getWinners(players, &G);
+        -:   83:
+        1:   84:        printf("expected result for p1: 1, actual result: %d\n", players[0]);
+        1:   85:        printf("expected result for p2: 0, actual result: %d\n", players[1]);
+        -:   86:
+        1:   87:        if (players[0] != 1 || players[1] != 0){
+    #####:   88:                printf("test failed\n");
+    #####:   89:                failures++;
+        -:   90:        }
+        -:   91:
+        -:   92:	//both have the same scores
+        1:   93:        memset(&G, 23, sizeof(struct gameState));
+        1:   94:        r = initializeGame(numPlayer, k, seed, &G);
+        1:   95:        G.handCount[0]=5;
+        1:   96:        G.handCount[1]=5;
+        1:   97:	G.whoseTurn = 2;
+        -:   98:
+        1:   99:        memcpy(G.hand[0], estates, sizeof(int) * maxHandCount);
+        1:  100:        memcpy(G.hand[1], estates, sizeof(int) * maxHandCount);
+        -:  101:
+        1:  102:        getWinners(players, &G);
+        -:  103:
+        1:  104:        printf("expected result for p1: 1, actual result: %d\n", players[0]);
+        1:  105:        printf("expected result for p2: 1, actual result: %d\n", players[1]);
+        -:  106:
+        1:  107:        if (players[0] != 1 || players[1] != 1){
+    #####:  108:                printf("test failed\n");
+    #####:  109:                failures++;
+        -:  110:        }
+        -:  111:
+        -:  112:
+        -:  113:	//both have the same scores, but p2 wins because it's still p1's turns
+        1:  114:        memset(&G, 23, sizeof(struct gameState));
+        1:  115:        r = initializeGame(numPlayer, k, seed, &G);
+        1:  116:        G.handCount[0]=5;
+        1:  117:        G.handCount[1]=5;
+        -:  118:        //G.whoseTurn = 2; the turn is left at p1
+        -:  119:
+        1:  120:        memcpy(G.hand[0], estates, sizeof(int) * maxHandCount);
+        1:  121:        memcpy(G.hand[1], estates, sizeof(int) * maxHandCount);
+        -:  122:
+        1:  123:        getWinners(players, &G);
+        -:  124:
+        1:  125:        printf("expected result for p1: 0, actual result: %d\n", players[0]);
+        1:  126:        printf("expected result for p2: 1, actual result: %d\n", players[1]);
+        -:  127:
+        1:  128:        if (players[0] != 0 || players[1] != 1){
+    #####:  129:                printf("test failed\n");
+    #####:  130:                failures++;
+        -:  131:        }
+        -:  132:
+        1:  133:	printf("Total failed cases: %d\n", failures);
+        -:  134:
+        -:  135:
+        -:  136:
+        1:  137:return 0;
+        -:  138:}
+        -:  139:
+        -:  140:
+        -:  141:
+        -:  142:
+        -:  143:
+        -:  144:
+        -:  145:
+        -:  146:
+        -:  147:
+        -:  148:
+        -:  149:
+        -:  150:
+        -:  151:
+        -:  152:
+        -:  153:
+        -:  154:
+        -:  155:
+        -:  156:
+        -:  157:
+        -:  158:
+        -:  159:
+        -:  160:
+        -:  161:
+        -:  162:
+        -:  163:
+        -:  164:
+        -:  165:
+        -:  166:
+        -:  167:

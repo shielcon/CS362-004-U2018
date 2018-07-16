@@ -1,0 +1,110 @@
+        -:    0:Source:testGainCard.c
+        -:    0:Graph:testGainCard.gcno
+        -:    0:Data:testGainCard.gcda
+        -:    0:Runs:1
+        -:    0:Programs:1
+        -:    1:#include "dominion.h"
+        -:    2:#include "dominion_helpers.h"
+        -:    3:#include <string.h>
+        -:    4:#include <stdio.h>
+        -:    5:#include <assert.h>
+        -:    6:#include "rngs.h"
+        -:    7:
+        -:    8:#define NOISY_TEST 1
+        -:    9:
+        1:   10:int main(){
+        -:   11:
+        1:   12:	int seed = 1000;
+        1:   13:	int k[10] = {adventurer, council_room, feast, gardens, mine, remodel, smithy, village, baron, great_hall};
+        -:   14:	struct gameState G;
+        1:   15:	struct gameState *state = &G;
+        1:   16:	int numPlayer = 2;
+        1:   17:	memset(&G, 23, sizeof(struct gameState));
+        1:   18:	int r = initializeGame(numPlayer, k, seed, &G);
+        -:   19:
+        1:   20:	int player = 0;
+        1:   21:	int supplyPos = adventurer;
+        1:   22:	int failures=0;
+        -:   23:
+        1:   24:	G.deckCount[player]=0;
+        1:   25:	G.handCount[player]=0;
+        1:   26:	G.discardCount[player]=0;
+        1:   27:	G.supplyCount[adventurer] = 10;
+        1:   28:	G.supplyCount[feast] = 1;
+        1:   29:	G.supplyCount[smithy] = 0;
+        -:   30:
+        1:   31:	gainCard(adventurer, &G, 0, player); //to flag = 0 - to discard
+        -:   32:
+        -:   33:
+        1:   34:	printf("player should have 1 adventurer in the discard. The supply should have one less adventurer. No other cards should have changed\n");
+        -:   35:
+        1:   36:        if (
+        1:   37:           state->discard[player][state->discardCount[player]-1] == supplyPos
+        1:   38:           && state->deckCount[player] == 0
+        1:   39:           && state->handCount[player] == 0
+        1:   40:           && state->discardCount[player] == 1
+        1:   41:           && state->supplyCount[adventurer] == 9
+        1:   42:           && state->supplyCount[feast] == 1
+        1:   43:           && state->supplyCount[smithy] == 0)
+        1:   44:		printf("success\n");
+        -:   45:	else{
+    #####:   46:		printf("test 1 failed\n");
+    #####:   47:		failures++;
+        -:   48:	}
+        -:   49:
+        -:   50:
+        1:   51:        gainCard(adventurer, &G, 1, player); //to flag = 1 - to deck
+        -:   52:
+        1:   53:        printf("player should have 1 adventurer in the deck. The supply should have one less adventurer. No other cards should have changed\n");
+        -:   54:
+        -:   55:
+        1:   56:        if (state->deck[player][state->deckCount[player]-1] == supplyPos
+        1:   57:           && state->deckCount[player] == 1
+        1:   58:           && state->handCount[player] == 0
+        1:   59:           && state->deckCount[player] == 1
+        1:   60:           && state->supplyCount[adventurer] == 8
+        1:   61:           && state->supplyCount[feast] == 1
+        1:   62:           && state->supplyCount[smithy] == 0)
+        1:   63:                printf("success\n");
+        -:   64:        else{
+    #####:   65:                printf("test 2 failed\n");
+    #####:   66:                failures++;
+        -:   67:        }
+        -:   68:
+        -:   69:
+        1:   70:        gainCard(adventurer, &G, 2, player); //to flag = 2 - to hand
+        -:   71:
+        1:   72:        printf("player should have 1 adventurer in the hand. The supply should have one less adventurer. No other cards should have changed\n");
+        -:   73:
+        -:   74:
+        1:   75:        if (
+        1:   76:	   state->hand[player][state->handCount[player]-1] == supplyPos
+        1:   77:           && state->deckCount[player] == 1
+        1:   78:           && state->handCount[player] == 1
+        1:   79:           && state->handCount[player] == 1
+        1:   80:           && state->supplyCount[adventurer] == 7
+        1:   81:           && state->supplyCount[feast] == 1
+        1:   82:           && state->supplyCount[smithy] == 0)
+        1:   83:                printf("success\n");
+        -:   84:        else{
+    #####:   85:                printf("test 3 failed\n");
+    #####:   86:                failures++;
+        -:   87:        }
+        -:   88:
+        -:   89:
+        1:   90:	gainCard(feast, &G, 0, player); // should only return one feast
+        1:   91:	if (gainCard(feast, &G, 0, player) > -1){
+    #####:   92:		printf("Test failed. No feast cards remaining\n");
+    #####:   93:		failures++;
+        -:   94:	}
+        1:   95:	if (gainCard(smithy, &G, 0, player) > -1){
+    #####:   96:		printf("Test failed. No smithy cards remaining\n");
+    #####:   97:		failures++;
+        -:   98:	}
+        -:   99:
+        -:  100:
+        1:  101:	printf("Total falures: %d\n", failures);
+        -:  102:
+        1:  103:	return 0;
+        -:  104:
+        -:  105:}

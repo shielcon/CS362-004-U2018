@@ -1,0 +1,78 @@
+Result for running Dominion tests:
+unittest1.c:
+expected result for p1: 1, actual result: 1
+expected result for p2: 0, actual result: 0
+expected result for p1: 0, actual result: 0
+expected result for p2: 1, actual result: 1
+expected result for p1: 1, actual result: 1
+expected result for p2: 0, actual result: 0
+expected result for p1: 1, actual result: 1
+expected result for p2: 1, actual result: 1
+expected result for p1: 0, actual result: 0
+expected result for p2: 1, actual result: 1
+Total failed cases: 0
+File 'dominion.c'
+Lines executed:22.76% of 558
+Creating 'dominion.c.gcov'
+
+unittest2.c:
+playedCards should contain 2 cards. It contains 2 cards
+PlayedCards should still contain 2 cards, player 1 shoule have 3 remaining cards. PlayedCards = 2. Player 1's hand has 3 cards
+player 1 shoule have an adventurer and a smithy. The curse should not be in the player's hand
+card: 7
+card: 13
+total failures: 0
+File 'dominion.c'
+Lines executed:24.91% of 558
+Creating 'dominion.c.gcov'
+
+unittest3.c:
+player should have 1 adventurer in the discard. The supply should have one less adventurer. No other cards should have changed
+success
+player should have 1 adventurer in the deck. The supply should have one less adventurer. No other cards should have changed
+success
+player should have 1 adventurer in the hand. The supply should have one less adventurer. No other cards should have changed
+success
+Total falures: 0
+File 'dominion.c'
+Lines executed:27.60% of 558
+Creating 'dominion.c.gcov'
+
+unittest4.c:
+Success
+File 'dominion.c'
+Lines executed:28.14% of 558
+Creating 'dominion.c.gcov'
+
+cardtest1.c:
+Success
+Failure. Something is wrong with the discard pile
+Success
+Failure. Something is wrong with the discard pile
+File 'dominion.c'
+Lines executed:35.13% of 558
+Creating 'dominion.c.gcov'
+
+cardtest2.c:
+failure. The player has too many cards in their hand
+total failures: 1
+File 'dominion.c'
+Lines executed:35.84% of 558
+Creating 'dominion.c.gcov'
+
+cardtest3.c:
+Success. The player has the correct number of cards
+Success
+Total failures: 0
+File 'dominion.c'
+Lines executed:36.56% of 558
+Creating 'dominion.c.gcov'
+
+cardtest4.c:
+Success. Smithy added to hand
+success
+Total failures: 0
+File 'dominion.c'
+Lines executed:37.46% of 558
+Creating 'dominion.c.gcov'
+
