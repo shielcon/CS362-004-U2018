@@ -130,7 +130,7 @@ int main(){
                 failures++;
         }
 
-	if (faiilures > 0)
+	if (failures > 0)
 		printf("At least one test case failed. getWinners() needs to be debugged\n");
 	else
 		printf("All test cases for getWinners() passed\n");
