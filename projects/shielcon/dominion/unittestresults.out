@@ -12,7 +12,7 @@ expected result for p1: 0, actual result: 0
 expected result for p2: 1, actual result: 1
 Total failed cases: 0
 File 'dominion.c'
-Lines executed:22.76% of 558
+Lines executed:23.48% of 558
 Creating 'dominion.c.gcov'
 
 unittest2.c:
@@ -23,7 +23,7 @@ card: 7
 card: 13
 total failures: 0
 File 'dominion.c'
-Lines executed:24.91% of 558
+Lines executed:25.63% of 558
 Creating 'dominion.c.gcov'
 
 unittest3.c:
@@ -35,13 +35,13 @@ player should have 1 adventurer in the hand. The supply should have one less adv
 success
 Total falures: 0
 File 'dominion.c'
-Lines executed:27.60% of 558
+Lines executed:28.32% of 558
 Creating 'dominion.c.gcov'
 
 unittest4.c:
 Success
 File 'dominion.c'
-Lines executed:28.14% of 558
+Lines executed:28.85% of 558
 Creating 'dominion.c.gcov'
 
 cardtest1.c:
@@ -50,20 +50,20 @@ Failure. Something is wrong with the discard pile
 Success
 Failure. Something is wrong with the discard pile
 File 'dominion.c'
-Lines executed:35.13% of 558
+Lines executed:35.84% of 558
 Creating 'dominion.c.gcov'
 
 cardtest2.c:
 failure. The player has too many cards in their hand
 total failures: 1
 File 'dominion.c'
-Lines executed:35.84% of 558
+Lines executed:36.56% of 558
 Creating 'dominion.c.gcov'
 
 cardtest3.c:
-Success. The player has the correct number of cards
-Success
-Total failures: 0
+Success. The player has the correct number of actions
+Failure. Too many actions added
+Total failures: 1
 File 'dominion.c'
 Lines executed:36.56% of 558
 Creating 'dominion.c.gcov'

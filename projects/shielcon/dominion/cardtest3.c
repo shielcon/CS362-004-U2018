@@ -31,12 +31,12 @@ int main(){
 	
 
 	if (G.handCount[0] == 6 && G.hand[0][5] == adventurer)
-		printf("Success. The player has the correct number of cards\n");
+		printf("Success. The player has the correct number of actions\n");
 	else{
 		printf("Failure. The player doesn't have the correct number of cards\n");
 		failures++;
 	}
-	if (G.numActions = 2)
+	if (G.numActions == 2)
 		printf("Success\n");
 	else if (G.numActions > 2){
 		printf("Failure. Too many actions added\n");
