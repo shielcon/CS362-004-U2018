@@ -50,12 +50,13 @@ int main(){
 	}
 
 	for (i = 0; i < G.handCount[0]; i++){//ensures the card is drawn from the player's own hand
-		if (G.hand[0][i] == smithy){
+		if (G.hand[0][i] != adventurer){
 			printf("Test failed. Player acquired a card that wasn't in their deck\n");
 			failures++;
 		}
 	}
-	if (G.handCount[1] != 5 || G.deckCount[1] != 10 || G.discardCount[1] != 10){//ensures the  other player's gamestate is not changed
+
+	if (G.handcount[1] != 5 || G.deckCount[1] != 10 || G.discardCount != 5){
 		printf("Test failed. The other player's gamestate was affected somehow\n");
 		failures++;
 	}

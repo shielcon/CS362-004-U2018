@@ -75,6 +75,58 @@ int main(){
 		failures++;
 	}
 
+	//test for third player. Has nothing but adventurers in his hand
+	
+	G.handCount[2] = 5;
+	G.deckCount[2] = 10;
+	G.discardCount[2] = 10;
+
+	G.handCount[0] = 10;
+	G.handCount[1] = 10;
+	G.deckCount[0] = 10;
+	G.deckCount[1] = 10;
+	G.discardCount[0] = 10;
+	G.discardCount[1] = 10;
+
+	for (i = 0; i < 10; i++){
+
+		G.deck[2][i] = adventurer;
+		G.discard[2][i] = adventurer;
+		G.hand[0][i] = copper;
+		G.hand[1][i] = copper;
+		G.deck[0][i] = copper;
+		G.deck[1][i] = copper;
+		G.discard[0][i] = copper;
+		G.discard[1][i] = copper;
+	}
+
+	for (i = 0; i < 10; i++){
+		G.hand[2][i] = adventurer;
+	}
+
+	playAdventurer(&G, 2);
+
+	for (i = 0; i < G.handCount[2]; i++){
+		if (G.hand[2][i] == copper){
+			printf("Failure. The player should not have earned a copper\n");
+			failures++;
+		}
+	}
+
+	if (G.handCount[0] != 10 || G.handCount[1] != 10
+	   || G.deckCount[0] != 10 || G.deckCount[1] != 10
+	   || G.discardCount[0] != 10 || G.discardCount[1] != 10)
+	{
+		printf("Failed. The other player's game states were changed somehow\n");
+		failures++;
+	}
+
+	if (failures > 0)
+		printf("Not all test cases passed. The adventurer function needs to be debugged\n");
+	else
+		printf("All tests passed\n");
+	
+
 	return 0;
 }
 
