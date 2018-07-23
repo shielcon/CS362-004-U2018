@@ -20,6 +20,7 @@ int main(){
 	int player = 0;
 	int supplyPos = adventurer;
 	int failures=0;
+	int i;
 
 	G.deckCount[player]=0;
 	G.handCount[player]=0;
@@ -27,6 +28,16 @@ int main(){
 	G.supplyCount[adventurer] = 10;
 	G.supplyCount[feast] = 1;
 	G.supplyCount[smithy] = 0;
+
+        G.handCount[1] = 10;
+        G.deckCount[1] = 10;
+        G.discardCount[1] = 10;
+        for (i = 0; i < 10; i++){
+                G.hand[1][i] = remodel;
+                G.deck[1][i] = remodel;
+                G.discard[1][i] = remodel;
+        }
+
 
 	gainCard(adventurer, &G, 0, player); //to flag = 0 - to discard
 
@@ -97,8 +108,15 @@ int main(){
 		failures++;
 	}
 
+	if (G.handCount[1] != 10 || G.deckCount[1] != 10 || G.discardCount[1] != 10){
+		printf("Failure. Player 2's gamestate was affected\n");
+		failures++;
+	}
 
-	printf("Total falures: %d\n", failures);
+	if (failures > 0)
+		printf("The gainCard() function failed. It needs to be debuggged\n");
+	else
+		printf("The gainCard() function passed all test cases\n");
 
 	return 0;
 

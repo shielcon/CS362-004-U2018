@@ -61,10 +61,22 @@ int main(){
 	G.hand[0][1] = curse;
 	G.hand[0][0] = adventurer;
 
+        G.handCount[1] = 10;
+        G.deckCount[1] = 10;
+        G.discardCount[1] = 10;
+        for (i = 0; i < 10; i++){
+                G.hand[1][i] = remodel;
+                G.deck[1][i] = remodel;
+                G.discard[1][i] = remodel;
+        }
+
+
 	//discarding curse from hand
 	discardCard(1, 0, &G, trashFlag2);
 
-	printf("player 1 shoule have an adventurer and a smithy. The curse should not be in the player's hand\n");
+	
+
+	printf("player 1 should have an adventurer and a smithy. The curse should not be in the player's hand\n");
 
 	for (i = 0; i < G.handCount[0]; i++){
 		printf("card: %d\n", G.hand[0][i]);
@@ -73,8 +85,18 @@ int main(){
 			failures++;
 		}
 	}
+	
+	//ensures discarding the card only placed the card in player 1's discard pile. Also ensures the gamestate was not affected otherwise
 
-	printf("total failures: %d\n", failures);
+	if (G.handCount[1] != 10 || G.deckCount[1] != 10 || G.discardCount[1] != 10){
+		printf("Test failed. The second player's state was affected by calling discard for player 1\n");
+		failures++;
+	}
+
+	if (failures > 0)
+		printf("Not all test cases passed. The discardCard function needs to be debugged\n");
+	else
+		printf("No bugs were found in the discardCard function\n");
 
 	return 0;	
 

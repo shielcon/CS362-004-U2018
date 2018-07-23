@@ -21,11 +21,21 @@ int main(){
 	G.hand[0][0] = village;
 	G.deckCount[0] = 30;
 	G.numActions = 0;
+	G.whoseTurn = 0;
 	int i;
 	for (i = 1; i < 5; i++)
 		G.hand[0][i] = feast;
 	for (i = 0; i < 30; i++)
 		G.deck[0][i] = adventurer;
+
+	G.handCount[1] = 10;
+	G.deckCount[1] = 10;
+	G.discardCount[1] = 10;
+	for (i = 0; i < 10; i++){
+		G.hand[1][i] = remodel;
+		G.deck[1][i] = remodel;
+		G.discard[1][i] = remodel;
+	}
 
 	playVillage(0, &G, 0);
 	
@@ -47,7 +57,28 @@ int main(){
 		failures++;
 	}
 
-	printf("Total failures: %d\n", failures);
+	for (i = 0; i < G.handCount[0]; i++){//ensures the player drew the card from his own hand
+		if (G.hand[0][i] == remodel){
+			printf("Failure. the  player drew a card from another player somehow\n");
+			failures++;
+		}
+	}
+
+	if (G.handCount[1] != 10 || G.deckCount[1] != 10 || G.discardCount[1] != 10){
+		printf("Failure. The function affected another player's gamestate\n");
+		failures++;
+	}
+
+	if (G.whoseTurn != 0){
+		printf("Failure. The function caused the turn to change\n");
+		failures++;
+	}
+
+	if (failures > 0)
+		printf("Not all test cases passed. The playVillage function needs to be debugged\n");
+	else
+		printf("All test cases passed\n");
+
 
 	return 0;
 

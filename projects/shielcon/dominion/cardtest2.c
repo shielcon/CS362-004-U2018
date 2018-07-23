@@ -63,9 +63,13 @@ int main(){
 		printf("Test failed. The player's discard pile was affected somehow\n");
 		failures++;
 	}
+
+	if (failures > 0)
+		printf("Not all tests passed. The Smithy implementation needs to be debugged\n");
+	else
+		printf("All test cases passed\n");
 	
 
-	printf("total failures: %d\n", failures);
 
 	return 0;
 

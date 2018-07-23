@@ -16,6 +16,7 @@ int main(){
         int k[10] = {adventurer, council_room, feast, gardens, mine, remodel, smithy, village, baron, great_hall};
         memset(&G, 23, sizeof(struct gameState));
         int r = initializeGame(numPlayer, k, seed, &G);
+	G.whoseTurn = 0;
 
 	G.numActions = 1;
 	G.handCount[0] = 5;
@@ -27,11 +28,21 @@ int main(){
 	G.deckCount[0] = 30;
 	for (i = 0; i < 30; i++)
 		G.deck[0][i] = smithy;
+
+        G.handCount[1] = 10;
+        G.deckCount[1] = 10;
+        G.discardCount[1] = 10;
+        for (i = 0; i < 10; i++){
+                G.hand[1][i] = remodel;
+                G.deck[1][i] = remodel;
+                G.discard[1][i] = remodel;
+        }
+
 	
 	playGreat_hall(0, &G, 4);
 
 	if (G.hand[0][4] == smithy)
-		printf("Success. Smithy added to hand\n");
+		printf("Success. Smithy added to hand\n");//also ensures that the player drew from their own deck, since Smithy is only in their deck
 	else{
 		printf("Failure. Smithy has not been added\n");
 		failures++;
@@ -50,7 +61,16 @@ int main(){
 		failures++;
 	}
 
-	printf("Total failures: %d\n", failures);
+	if (G.whoseTurn != 0){
+		printf("Failure. The game state's turn was changed\n");
+		failures++;
+	}
+
+	if (failures > 0)
+		printf("Some tests failed. The Great_hall implementation needs to be debugged\n");
+	else
+		printf("All test cases passed\n");
+
 
 	return 0;
 
