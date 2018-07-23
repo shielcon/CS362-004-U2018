@@ -61,9 +61,9 @@ Lines executed:35.84% of 558
 Creating 'dominion.c.gcov'
 
 cardtest3.c:
-Success. The player has the correct number of cards
-Success
-Total failures: 0
+Success. The player has the correct number of actions
+Failure. Too many actions added
+Total failures: 1
 File 'dominion.c'
 Lines executed:36.56% of 558
 Creating 'dominion.c.gcov'
