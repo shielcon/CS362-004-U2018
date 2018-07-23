@@ -36,7 +36,7 @@ int main(){
 		printf("Failure. The player doesn't have the correct number of cards\n");
 		failures++;
 	}
-	if (G.numActions = 2)
+	if (G.numActions == 2)
 		printf("Success\n");
 	else if (G.numActions > 2){
 		printf("Failure. Too many actions added\n");
