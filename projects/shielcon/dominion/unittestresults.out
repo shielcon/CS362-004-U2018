@@ -12,7 +12,7 @@ expected result for p1: 0, actual result: 0
 expected result for p2: 1, actual result: 1
 All test cases for getWinners() passed
 File 'dominion.c'
-Lines executed:37.63% of 558
+Lines executed:52.69% of 558
 Creating 'dominion.c.gcov'
 
 unittest2.c:
@@ -23,7 +23,7 @@ card: 7
 card: 13
 No bugs were found in the discardCard function
 File 'dominion.c'
-Lines executed:37.63% of 558
+Lines executed:52.69% of 558
 Creating 'dominion.c.gcov'
 
 unittest3.c:
@@ -35,13 +35,13 @@ player should have 1 adventurer in the hand. The supply should have one less adv
 success
 The gainCard() function passed all test cases
 File 'dominion.c'
-Lines executed:37.63% of 558
+Lines executed:52.69% of 558
 Creating 'dominion.c.gcov'
 
 unittest4.c:
 Success
 File 'dominion.c'
-Lines executed:37.63% of 558
+Lines executed:52.69% of 558
 Creating 'dominion.c.gcov'
 
 cardtest1.c:
@@ -51,14 +51,14 @@ Success
 Failure. Something is wrong with the discard pile
 Not all test cases passed. The adventurer function needs to be debugged
 File 'dominion.c'
-Lines executed:37.63% of 558
+Lines executed:52.69% of 558
 Creating 'dominion.c.gcov'
 
 cardtest2.c:
 failure. The player has too many cards in their hand
 Not all tests passed. The Smithy implementation needs to be debugged
 File 'dominion.c'
-Lines executed:37.63% of 558
+Lines executed:52.69% of 558
 Creating 'dominion.c.gcov'
 
 cardtest3.c:
@@ -66,7 +66,7 @@ Success. The player has the correct number of actions
 Failure. Too many actions added
 Not all test cases passed. The playVillage function needs to be debugged
 File 'dominion.c'
-Lines executed:37.63% of 558
+Lines executed:52.69% of 558
 Creating 'dominion.c.gcov'
 
 cardtest4.c:
@@ -74,6 +74,6 @@ Success. Smithy added to hand
 success
 All test cases passed
 File 'dominion.c'
-Lines executed:37.63% of 558
+Lines executed:52.69% of 558
 Creating 'dominion.c.gcov'
 

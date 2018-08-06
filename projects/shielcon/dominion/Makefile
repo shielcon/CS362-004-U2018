@@ -45,6 +45,27 @@ cardtest3: cardtest3.c dominion.o rngs.o
 cardtest4: cardtest4.c dominion.o rngs.o
 	gcc -o cardtest4 -g cardtest4.c dominion.o rngs.o $(CFLAGS)
 
+randomtestadventurer: randomtestadventurer.c dominion.o rngs.o
+
+	echo "Results for Adventurer card test:" > randomtestadventurer.out
+	gcc -o randomtestadventurer -g randomtestadventurer.c dominion.o rngs.o $(CFLAGS)
+	randomtestadventurer >> randomtestadventurer.out
+	gcov -b dominion.c >> randomtestadventurer.out
+
+randomtestcard1: randomtestcard1.c dominion.o rngs.o
+
+	echo "Results for Steward card test:" > randomtestcard1.out
+	gcc -o randomtestcard1 -g randomtestcard1.c dominion.o rngs.o $(CFLAGS)
+	randomtestcard1 >> randomtestcard1.out
+	gcov -b dominion.c >> randomtestcard1.out
+
+randomtestcard2: randomtestcard2.c dominion.o rngs.o
+
+	echo "Results for Council Room card test:" > randomtestcard2.out
+	gcc -o randomtestcard2 -g randomtestcard2.c dominion.o rngs.o $(CFLAGS)
+	randomtestcard2 >> randomtestcard2.out
+	gcov -b dominion.c >> randomtestcard2.out
+
 unittestresults: unittest1.c unittest2.c unittest3.c unittest4.c cardtest1.c cardtest2.c cardtest3.c cardtest4.c dominion.o rngs.o
 	echo "Result for running Dominion tests:" > unittestresults.out
 

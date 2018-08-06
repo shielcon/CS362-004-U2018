@@ -1,0 +1,14 @@
+Results for Steward card test:
+Testing Steward
+Some tests failed. Total failures: 2497
+Failures for choice 1: 0
+Failures for choice 2: 2497
+Failures for choice 3: 0
+Cases where the state was incorrectly changed - indeterminant by this test case: 113
+File 'dominion.c'
+Lines executed:55.73% of 558
+Branches executed:60.48% of 415
+Taken at least once:44.10% of 415
+Calls executed:43.01% of 93
+Creating 'dominion.c.gcov'
+

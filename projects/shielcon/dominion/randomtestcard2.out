@@ -1,0 +1,10 @@
+Results for Council Room card test:
+Testing Council Room
+All tests passed
+File 'dominion.c'
+Lines executed:55.73% of 558
+Branches executed:60.48% of 415
+Taken at least once:44.10% of 415
+Calls executed:43.01% of 93
+Creating 'dominion.c.gcov'
+
