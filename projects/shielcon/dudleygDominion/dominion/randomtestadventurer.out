@@ -1,0 +1,13 @@
+Results for Adventurer card test:
+Testing Adventurer
+Some tests failed, total failures: 104809
+total hand failures: 184
+total failures of total cards in hand/deck/discard (i.e., adventurer reduces the total number of cards in the player's piles): 100000
+total failures related to general state change: 4625
+File 'dominion.c'
+Lines executed:10.48% of 563
+Branches executed:7.19% of 417
+Taken at least once:7.19% of 417
+Calls executed:5.26% of 95
+Creating 'dominion.c.gcov'
+

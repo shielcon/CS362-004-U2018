@@ -1,0 +1,10 @@
+Results for Steward card test:
+Testing Steward
+All tests passed
+File 'dominion.c'
+Lines executed:18.29% of 563
+Branches executed:17.03% of 417
+Taken at least once:12.23% of 417
+Calls executed:11.58% of 95
+Creating 'dominion.c.gcov'
+
